@@ -12,9 +12,7 @@ struct CompassView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "location.north.fill")
-                .imageScale(.large)
-                .foregroundColor(.red)
+            Image("redCross")
             Image("compass")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -23,5 +21,9 @@ struct CompassView: View {
                 .font(.largeTitle)
         }
         .background(Image("mapBackground"))
+        .onChange(of: self.compassService.degrees) { newValue in
+            let impactHeavy = UIImpactFeedbackGenerator(style: .medium)
+            impactHeavy.impactOccurred()
+        }
     }
 }
